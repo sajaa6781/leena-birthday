@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Leena ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    height:100vh;
+    background:black;
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+    color:white;
+}
+.container{
+    height:100%;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+}
+#name{font-size:2.5rem;color:#ff6fae;letter-spacing:4px}
+.birthdayText{
+    font-size:2.8rem;
+    color:#ffb3c6;
+    animation:glow 1.5s infinite alternate;
+}
+@keyframes glow{
+    from{text-shadow:0 0 10px #ff6fae}
+    to{text-shadow:0 0 25px #ffb3c6}
+}
+.photo{
+    margin:20px auto;
+    width:220px;height:220px;
+    border-radius:50%;
+    overflow:hidden;
+    border:3px solid #ff6fae;
+}
+.photo img{width:100%;height:100%;object-fit:cover}
+.message{
+    margin-top:15px;
+    font-style:italic;
+    color:#ffd1e8;
+}
+.proposal{
+    margin-top:25px;
+    font-size:1.2rem;
+    color:#ffb3c6;
+    display:none;
+}
+.buttons{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+button{
+    padding:10px 22px;
+    border:none;
+    border-radius:25px;
+    font-size:1rem;
+    cursor:pointer;
+}
+.yes{background:#ff6fae;color:white}
+.no{background:#444;color:#ccc}
+.result{
+    margin-top:20px;
+    font-size:1.2rem;
+    display:none;
+}
+.ring{
+    font-size:3rem;
+    animation:ring 1.2s infinite;
+}
+@keyframes ring{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.2)}
+    100%{transform:scale(1)}
+}
+.heart{
+    position:absolute;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+    to{transform:translateY(-110vh);opacity:0}
+}
+.tap{
+    margin-top:18px;
+    font-size:.9rem;
+    color:#aaa;
+    animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+    0%{opacity:.4}
+    50%{opacity:1}
+    100%{opacity:.4}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="zaalima.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" onclick="playMusic()">
+
+    <div id="name"></div>
+
+    <div class="photo">
+        <img src="leena.jpg" alt="Leena">
+    </div>
+
+    <p class="message">
+        “She is the best thing ever happened in my life.  
+        Until my last breath, I will never leave her hand alone.”
+    </p>
+
+    <div class="proposal" id="proposal">
+        Leena… ❤️<br><br>
+        I don’t want a perfect life.<br>
+        I just want a life with <b>you</b>.<br><br>
+        Will you hold my hand forever? 💍
+        <div class="buttons">
+            <button class="yes" onclick="yes()">YES</button>
+            <button class="no" onclick="no()">NO</button>
+        </div>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <div class="tap">Tap anywhere 💗 (Music will play)</div>
+</div>
+
+<script>
+/* Typing animation */
+const text="Happy Birthday Leena";
+let i=0;
+const nameDiv=document.getElementById("name");
+(function type(){
+    if(i<text.length){
+        nameDiv.innerHTML+=text.charAt(i++);
+        setTimeout(type,150);
+    }
+})();
+
+/* Music */
+function playMusic(){
+    document.getElementById("music").play();
+}
+
+/* Midnight switch */
+const birthday=new Date(new Date().getFullYear(),11,29,0,0,0);
+setInterval(()=>{
+    if(new Date()>=birthday){
+        nameDiv.innerHTML='<div class="birthdayText">HAPPY BIRTHDAY LEENA 🎉</div>';
+        document.getElementById("proposal").style.display="block";
+    }
+},1000);
+
+/* Proposal actions */
+function yes(){
+    document.getElementById("result").style.display="block";
+    document.getElementById("result").innerHTML=
+        '<div class="ring">💍</div><br>She said YES ❤️<br>This is the beginning of our forever.';
+}
+function no(){
+    document.getElementById("result").style.display="block";
+    document.getElementById("result").innerHTML=
+        'No matter what…<br>I will always respect you 💕';
+}
+
+/* Floating hearts */
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},300);
+</script>
+
+</body>
+</html>
